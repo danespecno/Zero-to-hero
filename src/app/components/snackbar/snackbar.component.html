@@ -1,0 +1,8 @@
+<div class="d-flex align-items-center">
+  <div class="flex-grow-1 d-flex align-items-center">
+    <mat-icon>{{ icon }}</mat-icon><span class="ml-3">{{ message }}</span> 
+  </div>
+  <div *ngIf="action" class="d-flex align-items-center">
+    <button mat-button (click)="onActionClick()">{{ action }}</button>
+  </div>
+</div>

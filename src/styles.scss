@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+button:focus {
+  outline: none;
+}
+
+$palette: (
+  "yellow": (
+    base: #ffcc32,
+  ),
+  "red": (
+    base: #dd0031,
+  ),
+);
+@mixin class-generator(
+  $attribute: "color",
+  $prefix: "-",
+  $separator: "-",
+  $base: "base"
+) {
+  @each $name, $color in $palette {
+    &#{$prefix}#{$name} {
+      @each $tone, $hex in $color {
+        &#{if($tone != $base, #{$separator}#{$tone}, '')} {
+          #{$attribute}: $hex;
+        }
+      }
+    }
+  }
+}
+.text {
+  @include class-generator();
+}
+.bg {
+  @include class-generator($attribute: "background-color");
+}
+.fill {
+  @include class-generator($attribute: "fill");
+}
+
+.mdl-card .firebaseui-callback-indicator-container {
+  height: 2px;
+}
+
+.mdl-card.firebaseui-container {
+  min-height: 2px;
+  margin-top: 5px;
+}

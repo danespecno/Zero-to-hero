@@ -1,0 +1,18 @@
+<div>
+  <div mat-dialog-title>ToDo Header</div>
+  <mat-dialog-content>
+    <mat-form-field float="never">
+      <input
+        matInput
+        [(ngModel)]="header"
+        placeholder="Example Header"
+        (keydown)="$event.keyCode === 13 ? addHeader() : null"
+      />
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button [disabled]="!header" (click)="addHeader()">
+      Add Header
+    </button>
+  </mat-dialog-actions>
+</div>

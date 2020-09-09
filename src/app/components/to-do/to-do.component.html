@@ -1,0 +1,78 @@
+<div class="px-4">
+  <mat-card class="w-100 mx-auto my-2" style="max-width: 800px">
+    <div class="hide-scrollbar overflow-auto">
+      <ng-container *ngIf="toDos !== undefined; else LoadingTodos">
+        <ng-container *ngIf="(toDos | keyvalue)['length']; else NoTodos">
+          <ng-container *ngFor="let header of toDos | keyvalue; let first=first">
+            <div class="h5 mb-0 pb-3 d-flex" [class.pt-3]="!first">
+              <div class="flex-grow-1 d-flex align-items-center">
+                {{ header.key }}
+              </div>
+              <button
+                mat-raised-button
+                class="mr-2"
+                (click)="addToDo(header.key)"
+              >
+                <mat-icon>add</mat-icon>ToDo
+              </button>
+              <button mat-raised-button (click)="removeHeader(header.key)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div
+              *ngFor="
+                let toDo of header.value;
+                let first = first;
+                let last = last
+              "
+              class="bg-red px-4 py-2 w-100 list-item d-flex"
+              [class.mb-3]="!last"
+              [class.mt-3]="!first"
+              [class.red-inset-neumorphism]="toDo.isComplete"
+              [class.yellow-inset-neumorphism]="!toDo.isComplete"
+              style="min-height: 56px"
+            >
+              <div class="flex-grow-1 d-flex align-items-center">
+                {{ toDo.text }}
+              </div>
+              <div class="d-flex d-flex align-items-center">
+                <button
+                  mat-icon-button
+                  *ngIf="toDo.isComplete"
+                  (click)="removeToDo(header.key, toDo.uid)"
+                  class="mr-2"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <mat-checkbox
+                  [checked]="toDo.isComplete"
+                  (change)="toggleToDoIsComplete(header.key, toDo.uid)"
+                  class="ml-1 mb-n2"
+                ></mat-checkbox>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div *ngIf="toDos !== undefined" class="d-flex justify-content-center pt-3">
+      <button mat-raised-button (click)="addHeader()" class="mr-2">
+        <mat-icon>add</mat-icon>Header
+      </button>
+      <button
+        mat-raised-button
+        [disabled]="!(toDos | keyvalue)['length']"
+        (click)="removeCompletedToDos()"
+      >
+        <mat-icon>delete</mat-icon>All Completed ToDos
+      </button>
+    </div>
+  </mat-card>
+</div>
+
+<ng-template #NoTodos>
+  <div class="h4 pt-3">No ToDos found, go ahead an add one!</div>
+</ng-template>
+<ng-template #LoadingTodos
+  ><div class="h4 pt-3">Loading ToDos...</div></ng-template
+>

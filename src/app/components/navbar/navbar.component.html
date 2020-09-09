@@ -1,0 +1,15 @@
+<mat-toolbar class="bg-red text-white d-flex">
+  <div class="flex-grow-1">{{ navbarText }}</div>
+  <div *ngIf="isLoggedIn" class="d-flex align-items-center">
+    <button mat-button [matMenuTriggerFor]="menu">
+      <span class="h5 mb-0 mr-2">{{ userDisplayName }}</span>
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="signOut()">
+        <mat-icon>vpn_key</mat-icon>
+        <span>Sign Out</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
