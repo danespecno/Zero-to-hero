@@ -1,6 +1,8 @@
 # A Brief Practical introduction to Firebase
 
 ## Zero-To-Hero: an Angular based Project
+Downloading this project is not a requirement for the practical side of the talk, this is purely if you want to follow along.
+
 
 ## Requirements:
 
